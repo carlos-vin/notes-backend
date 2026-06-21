@@ -18,6 +18,20 @@ class NoteController {
             return res.status(500).json({ error: 'erro ao buscar notas.' });
         }
     }
+
+    async delete(req, res) {
+    try {
+      await NoteService.delete(req.params.id);
+
+      res.status(200).json({
+        message: "Nota deletada com sucesso"
+      });
+    } catch (error) {
+      res.status(404).json({
+        error: error.message
+      });
+    }
+  }
 }
 
 module.exports = new NoteController();

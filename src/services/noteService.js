@@ -10,6 +10,16 @@ class NoteService {
     async getAllNotes() {
         return await NoteRepository.findAll();
     }
+
+    async delete(id) {
+    const note = await NoteRepository.findById(id);
+
+    if (!note) {
+      throw new Error("Nota não encontrada");
+    }
+
+    return NoteRepository.delete(id);
+  }
 }
 
 module.exports = new NoteService();
